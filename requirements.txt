@@ -1,0 +1,10 @@
+# Core dependencies (none — uses Python standard library)
+
+# Optional: for PDF conversion
+# PyPDF2
+
+# Optional: for XLSX conversion
+# openpyxl
+
+# Development
+pytest>=7.0

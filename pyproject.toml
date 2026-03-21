@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cli-tools-hub"
+version = "0.1.0"
+description = "AI-agent-friendly CLI tools as subcommands. One command, multiple tools, structured JSON output."
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.9"
+authors = [
+    {name = "Agent Tools Hub Contributors"},
+]
+keywords = ["cli", "ai", "agents", "tools", "weather", "search", "converter"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+dependencies = []
+
+[project.optional-dependencies]
+pdf = ["PyPDF2"]
+xlsx = ["openpyxl"]
+all = ["PyPDF2", "openpyxl"]
+
+[project.scripts]
+ath = "src.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["src*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
