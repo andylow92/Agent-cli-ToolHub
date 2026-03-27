@@ -40,6 +40,12 @@ ath search --query "latest Python 3.13 features"
 # Convert CSV to JSON
 ath convert --input data.csv --to json
 
+# Save agent output as organised Markdown
+ath md-organizer save --title "Research Notes" --category research --content "# Findings..."
+
+# Browse your knowledge base in the browser
+ath md-organizer serve
+
 # Send verified message to another agent
 ath verify --send --to http://localhost:8004/talk --message "hello"
 
@@ -54,6 +60,7 @@ ath verify --check --request-id "abc-123" --response '{"request_id": "abc-123"}'
 | Weather | `ath weather` | Current weather for any city via OpenWeatherMap | `OPENWEATHERMAP_API_KEY` |
 | Search | `ath search` | AI-powered web search via Perplexity Sonar | `PERPLEXITY_API_KEY` |
 | Convert | `ath convert` | Convert between file formats (CSV, JSON, XML, HTML, Markdown, PDF, XLSX) | None |
+| MD Organizer | `ath md-organizer` | Save, organise, search, and browse Markdown files with a GitHub-style viewer | None |
 | Verify | `ath verify` | Verified inter-agent communication with request_id verification | None |
 
 ## Output Format
