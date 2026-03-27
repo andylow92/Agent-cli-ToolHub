@@ -48,6 +48,34 @@ def main():
     convert_parser.add_argument("--to", required=True, dest="to_format", help="Target format (csv, json, xml, html, markdown, text, tsv, pdf, xlsx)")
     convert_parser.add_argument("--output", dest="output_file", default=None, help="Output file path (required for binary formats)")
 
+    # --- md-organizer ---
+    md_parser = subparsers.add_parser("md-organizer", help="Organise and browse Markdown knowledge base")
+    md_sub = md_parser.add_subparsers(dest="md_command", help="md-organizer commands")
+
+    md_init = md_sub.add_parser("init", help="Initialise a new .md-hub directory")
+    md_init.add_argument("--path", default=None, help="Custom hub directory (default: .md-hub)")
+
+    md_save = md_sub.add_parser("save", help="Save content as an organised Markdown file")
+    md_save.add_argument("--title", required=True, help="Document title")
+    md_save.add_argument("--content", default=None, help="Markdown body text")
+    md_save.add_argument("--file", default=None, help="Read content from this file instead")
+    md_save.add_argument("--category", default="general", help="Category / sub-directory (default: general)")
+    md_save.add_argument("--tags", default=None, help="Comma-separated tags")
+    md_save.add_argument("--path", default=None, help="Custom hub directory")
+
+    md_list = md_sub.add_parser("list", help="List all documents in the hub")
+    md_list.add_argument("--category", default=None, help="Filter by category")
+    md_list.add_argument("--path", default=None, help="Custom hub directory")
+
+    md_search = md_sub.add_parser("search", help="Search documents by keyword")
+    md_search.add_argument("--query", required=True, help="Search term")
+    md_search.add_argument("--path", default=None, help="Custom hub directory")
+
+    md_serve = md_sub.add_parser("serve", help="Start local server with GitHub-style viewer")
+    md_serve.add_argument("--port", type=int, default=3000, help="Port number (default: 3000)")
+    md_serve.add_argument("--no-open", action="store_true", help="Don't auto-open browser")
+    md_serve.add_argument("--path", default=None, help="Custom hub directory")
+
     # --- verify ---
     verify_parser = subparsers.add_parser("verify", help="Verified inter-agent communication")
     verify_group = verify_parser.add_mutually_exclusive_group(required=True)
@@ -73,6 +101,12 @@ def main():
         run(args)
     elif args.command == "convert":
         from src.convert import run
+        run(args)
+    elif args.command == "md-organizer":
+        if not args.md_command:
+            md_parser.print_help()
+            sys.exit(0)
+        from src.md_organizer import run
         run(args)
     elif args.command == "verify":
         from src.verify import run
