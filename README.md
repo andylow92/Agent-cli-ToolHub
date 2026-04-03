@@ -81,6 +81,10 @@ ath search --query "latest Python 3.13 features"
 # Convert CSV to JSON
 ath convert --input data.csv --to json
 
+# Look up drug information from OpenFDA (no API key needed)
+ath drug-info --name "aspirin"
+ath drug-info --name "metformin" --field indications
+
 # Send a verified message to another agent
 ath verify --send --to http://localhost:8004/talk --message "hello"
 
@@ -97,6 +101,7 @@ ath verify --check --request-id "abc-123" --response '{"request_id": "abc-123"}'
 | Weather | `ath weather` | Current weather for any city via OpenWeatherMap | `OPENWEATHERMAP_API_KEY` |
 | Search | `ath search` | AI-powered web search via Perplexity Sonar — returns answers with citations, not just links | `PERPLEXITY_API_KEY` |
 | Convert | `ath convert` | Convert between file formats: CSV, JSON, XML, HTML, Markdown, TSV, PDF, XLSX | None |
+| Drug Info | `ath drug-info` | Look up FDA drug label data (indications, warnings, dosage, contraindications) via OpenFDA | None |
 | Verify | `ath verify` | Inter-agent communication with request_id round-trip verification — prevents hallucinated responses | None |
 
 ---
@@ -235,16 +240,19 @@ Agent-cli-ToolHub/
 │   ├── weather.py           # ath weather
 │   ├── search.py            # ath search
 │   ├── convert.py           # ath convert
+│   ├── drug_info.py         # ath drug-info
 │   └── verify.py            # ath verify
 ├── skills/
 │   ├── ath-weather/SKILL.md
 │   ├── ath-search/SKILL.md
 │   ├── ath-convert/SKILL.md
+│   ├── ath-drug-info/SKILL.md
 │   └── ath-verify/SKILL.md
 ├── tests/
 │   ├── test_weather.py
 │   ├── test_search.py
 │   ├── test_convert.py
+│   ├── test_drug_info.py
 │   └── test_verify.py
 ├── AGENTS.md                # Instructions for AI agents working on this repo
 ├── README.md

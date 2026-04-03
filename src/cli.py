@@ -76,6 +76,16 @@ def main():
     md_serve.add_argument("--no-open", action="store_true", help="Don't auto-open browser")
     md_serve.add_argument("--path", default=None, help="Custom hub directory")
 
+    # --- drug-info ---
+    drug_parser = subparsers.add_parser("drug-info", help="Look up medication information via OpenFDA")
+    drug_parser.add_argument("--name", required=True, help="Drug brand name or generic name (e.g. 'aspirin', 'metformin')")
+    drug_parser.add_argument(
+        "--field",
+        choices=["indications", "warnings", "contraindications", "dosage", "adverse_reactions"],
+        default=None,
+        help="Return a specific field only (default: return full summary)",
+    )
+
     # --- verify ---
     verify_parser = subparsers.add_parser("verify", help="Verified inter-agent communication")
     verify_group = verify_parser.add_mutually_exclusive_group(required=True)
@@ -107,6 +117,9 @@ def main():
             md_parser.print_help()
             sys.exit(0)
         from src.md_organizer import run
+        run(args)
+    elif args.command == "drug-info":
+        from src.drug_info import run
         run(args)
     elif args.command == "verify":
         from src.verify import run
