@@ -2,6 +2,31 @@
 name: ath_verify
 description: Verified inter-agent communication with request_id round-trip verification.
 metadata: {"openclaw": {"requires": {"bins": ["ath"]}}}
+input_schema:
+  type: object
+  properties:
+    send:
+      type: boolean
+      description: Send mode — send a message to an agent
+    check:
+      type: boolean
+      description: Check mode — verify a received response
+    to:
+      type: string
+      description: Target agent URL (required with --send)
+    message:
+      type: string
+      description: Message to send (required with --send)
+    request_id:
+      type: string
+      description: Expected request ID (required with --check)
+    response:
+      type: string
+      description: Response JSON text to verify (required with --check)
+    timeout:
+      type: integer
+      description: Timeout in milliseconds (default 10000)
+  required: []
 ---
 
 # Verified Agent Communication
