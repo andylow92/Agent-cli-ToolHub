@@ -2,6 +2,38 @@
 name: ath_md_organizer
 description: Organise agent output and files into a browsable Markdown knowledge base with a GitHub-style viewer.
 metadata: {"openclaw": {"requires": {"bins": ["ath"]}}}
+input_schema:
+  type: object
+  properties:
+    subcommand:
+      type: string
+      enum: [init, save, list, search, serve]
+      description: Subcommand to run
+    title:
+      type: string
+      description: Document title (required for save)
+    category:
+      type: string
+      description: Document category (required for save; optional filter for list)
+    content:
+      type: string
+      description: Markdown content to save (for save subcommand)
+    file:
+      type: string
+      description: File path to read content from (for save subcommand)
+    tags:
+      type: string
+      description: Comma-separated tags (for save subcommand)
+    query:
+      type: string
+      description: Search query (required for search subcommand)
+    port:
+      type: integer
+      description: Port for web viewer (for serve subcommand, default 8080)
+    no_open:
+      type: boolean
+      description: Do not auto-open browser (for serve subcommand)
+  required: [subcommand]
 ---
 
 # Markdown Organizer

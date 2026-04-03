@@ -2,6 +2,19 @@
 name: ath_convert
 description: Convert between file formats (CSV, JSON, XML, HTML, Markdown, PDF, XLSX) using the CLI Tools Hub.
 metadata: {"openclaw": {"requires": {"bins": ["ath"]}}}
+input_schema:
+  type: object
+  properties:
+    input:
+      type: string
+      description: Input file path
+    to:
+      type: string
+      description: Target format (e.g. json, csv, xml, html, text)
+    output:
+      type: string
+      description: Output file path (defaults to stdout; required for binary formats)
+  required: [input, to]
 ---
 
 # File Format Converter

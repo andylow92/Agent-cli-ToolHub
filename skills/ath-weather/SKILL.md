@@ -2,6 +2,17 @@
 name: ath_weather
 description: Get current weather for any city using the CLI Tools Hub weather command.
 metadata: {"openclaw": {"requires": {"bins": ["ath"]}, "primaryEnv": "OPENWEATHERMAP_API_KEY"}}
+input_schema:
+  type: object
+  properties:
+    city:
+      type: string
+      description: City name (e.g. "London")
+    units:
+      type: string
+      enum: [metric, imperial, standard]
+      description: Temperature unit system (default metric)
+  required: [city]
 ---
 
 # Weather Lookup

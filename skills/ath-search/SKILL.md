@@ -2,6 +2,24 @@
 name: ath_search
 description: AI-powered web search via Perplexity Sonar API using the CLI Tools Hub search command.
 metadata: {"openclaw": {"requires": {"bins": ["ath"]}, "primaryEnv": "PERPLEXITY_API_KEY"}}
+input_schema:
+  type: object
+  properties:
+    query:
+      type: string
+      description: The search query or question
+    model:
+      type: string
+      enum: [sonar, sonar-pro]
+      description: Search model to use (default sonar)
+    recency:
+      type: string
+      enum: [day, week, month, year]
+      description: Filter results by recency
+    max_results:
+      type: integer
+      description: Max tokens in response (default 1024)
+  required: [query]
 ---
 
 # AI Web Search
